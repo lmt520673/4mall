@@ -2,15 +2,15 @@
 	<view class="profile">
 		<!-- 个人信息 -->
 		<view class="profile-info">
-			<view class="info-user">
-				<image class="avatar" src="" mode=""></image>
-				<view class="user">
-					<view class="nickname">
-						华沙雕
+			<navigator url="/pages/login/login">
+				<view class="info-user" v-if="true">
+					<image class="avatar" src="" mode=""></image>
+					<view class="user">
+						<view class="nickname">未登录</view>
+						<view class="account">点击登录账号</view>
 					</view>
-					<!-- <image class="grade" src="" mode=""></image> -->
 				</view>
-			</view>
+			</navigator>
 			<view class="icons">
 				<text class="iconfont">&#xe712;</text>
 				<text class="iconfont">&#xe614;</text>
@@ -31,10 +31,12 @@
 			<title-header></title-header>
 			<view class="icons">
 				<template v-for="item in iconsList" :key="item.text">
-					<view class="icons-item">
-						<image class="image" :src="item.image" mode=""></image>
-						<view class="text">{{item.text}}</view>
-					</view>
+					<navigator :url="'/pages/order/order?status='+item.status">
+						<view class="icons-item">
+							<image class="image" :src="item.image" mode=""></image>
+							<view class="text">{{item.text}}</view>
+						</view>
+					</navigator>
 				</template>
 			</view>
 		</view>
@@ -55,10 +57,10 @@
 			<title-header title="服务与工具" :isShowRight="false"></title-header>
 			<view class="content">
 				<template v-for="item in toolList" :key="item.title">
-						<view class="content-item" @click="handleToPage(item.url)">
-							<view class="iconfont icon">{{item.icon}}</view>
-							<view class="title">{{item.title}}</view>
-						</view>
+					<view class="content-item" @click="handleToPage(item.url)">
+						<view class="iconfont icon">{{item.icon}}</view>
+						<view class="title">{{item.title}}</view>
+					</view>
 				</template>
 			</view>
 		</view>
@@ -73,17 +75,21 @@
 
 	const iconsList = ref([{
 			image: '/static/images/profile/toPay.png',
-			text: '待支付',
+			text: '待付款',
+			status: 1
 		},
 		{
 			image: '/static/images/profile/toDelivery.png',
-			text: '待发货'
+			text: '待发货',
+			status: 2
 		}, {
 			image: '/static/images/profile/toTake.png',
-			text: '待收货'
+			text: '待收货',
+			status: 3
 		}, {
 			image: '/static/images/profile/toComment.png',
-			text: '已完成'
+			text: '已完成',
+			status: 4
 		}
 	])
 
@@ -119,16 +125,14 @@
 			title: '官方客服'
 		}, {
 			icon: '\ue67c',
-			title: '系统设置'
+			title: '系统设置',
+			url: '/pages/setting/setting'
 		}
 	])
-	
-	function handleToPage(url){
+
+	function handleToPage(url) {
 		uni.navigateTo({
-			url:url,
-			success() {
-				
-			}
+			url: url
 		})
 	}
 </script>
@@ -152,16 +156,24 @@
 				align-items: center;
 
 				.avatar {
-					width: 90rpx;
-					height: 90rpx;
+					width: 100rpx;
+					height: 100rpx;
 					background-color: aqua;
 					border-radius: 50%;
+					margin-right: 20rpx;
 				}
 
 				.user {
+
 					.nickname {
 						font-size: 30rpx;
-						margin-left: 20rpx;
+					}
+
+					.account {
+						color: #999;
+						font-size: 26rpx;
+						margin-top: 14rpx;
+
 					}
 				}
 			}

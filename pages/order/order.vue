@@ -1,5 +1,5 @@
 <template>
-	<van-tabs v-model:active="activeTab" @change="handleTabChange">
+	<van-tabs v-model:active="activeTab" @click-tab="handleTabChange">
 		<template v-for="item in tabList" :key="item.name">
 			<van-tab :title="item.title" :name="item.name">
 				<view v-if="orderList.length>0" class="order-content">
@@ -58,15 +58,23 @@
 		useOrderStore
 	} from '@/store/order.js'
 	import {
+		onLoad
+	} from '@dcloudio/uni-app'
+	import {
 		ref,
-		computed
+		computed,
+		watch
 	} from 'vue'
 
 	const orderStore = useOrderStore()
 	const {
 		orderList
 	} = storeToRefs(orderStore)
+
+	//绑定的tab值
 	const activeTab = ref(0);
+
+	//tab栏循环列表
 	const tabList = ref([{
 		title: '全部',
 		name: 0
@@ -84,17 +92,9 @@
 		name: 4
 	}])
 
-	orderStore.fetchOrderList({
-		current: 1,
-		size: 10,
-		status: activeTab.value
-	})
-
+	//状态格式化
 	const statusFormat = computed(() => {
 		return function(status) {
-			// if (status === -1) {
-			// 	return '哈哈'
-			// }
 			switch (status) {
 				case -1:
 					return '已取消'
@@ -117,15 +117,34 @@
 		}
 	})
 
-	function handleTabChange(options) {
-		activeTab.value = options
+	//监听activeTab的变化，传进来的需是响应式对象，即可实时更新
+	watch(activeTab, (newVal, oldVal) => {
 		orderStore.fetchOrderList({
 			current: 1,
 			size: 10,
-			status: activeTab.value
+			status: newVal
 		})
+	})
+
+	//页面刚进来的时候
+	onLoad((options) => {
+		if (options.isAll) {
+			orderStore.fetchOrderList({
+				current: 1,
+				size: 10,
+				status: activeTab.value
+			})
+			return
+		}
+		activeTab.value = Number(options.status)
+	})
+
+	//tab栏点击事件
+	function handleTabChange(options) {
+		activeTab.value = options.name
 	}
 
+	//删除订单事件
 	function handleDelOrder(orderNUmber) {
 		showConfirmDialog({
 			message: '确认要删除此订单吗？',

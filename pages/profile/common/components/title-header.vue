@@ -1,7 +1,7 @@
 <template>
 	<view class="order-top">
 		<view class="title">{{title}}</view>
-		<navigator url="/pages/order/order">
+		<navigator :url="'/pages/order/order?status='+0+'&isAll='+true">
 			<view class="iconfont all" v-if="isShowRight">{{desc}}</view>
 		</navigator>
 	</view>
