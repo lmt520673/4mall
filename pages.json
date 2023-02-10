@@ -1,0 +1,113 @@
+{
+	"easycom": {
+		"autoscan": true,
+		"custom": {
+			// uni-ui 规则如下配置
+			"^uni-(.*)": "@dcloudio/uni-ui/lib/uni-$1/uni-$1.vue"
+		}
+	},
+	"tabBar": {
+		"backgroundColor": "#fff",
+		"color": "#999",
+		"borderStyle": "black",
+		"selectedColor": "#3a86b9",
+		"list": [{
+				"pagePath": "pages/home/home",
+				"iconPath": "static/images/tabbar/homepage.png",
+				"selectedIconPath": "static/images/tabbar/homepage-sel.png",
+				"text": "首页"
+			},
+			{
+				"pagePath": "pages/category/category",
+				"iconPath": "static/images/tabbar/category.png",
+				"selectedIconPath": "static/images/tabbar/category-sel.png",
+				"text": "分类"
+			},
+			{
+				"pagePath": "pages/cart/cart",
+				"iconPath": "static/images/tabbar/basket.png",
+				"selectedIconPath": "static/images/tabbar/basket-sel.png",
+				"text": "购物车"
+			},
+			{
+				"pagePath": "pages/profile/profile",
+				"iconPath": "static/images/tabbar/user.png",
+				"selectedIconPath": "static/images/tabbar/user-sel.png",
+				"text": "我的"
+			}
+		]
+	},
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/home/home",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/category/category",
+			"style": {
+				"navigationStyle": "custom"
+				// "enablePullDownRefresh": false
+			}
+
+		},
+		{
+			"path": "pages/cart/cart",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		},
+		{
+			"path": "pages/profile/profile",
+			"style": {
+				"navigationBarTitleText": "个人中心",
+				"enablePullDownRefresh": false
+			}
+
+		}
+	    ,{
+            "path" : "pages/notice/notice",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "最新公告",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/address/address",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "收货地址",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/address-edit/address-edit",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/order/order",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "订单列表",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	}
+}
