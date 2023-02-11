@@ -10,7 +10,7 @@ class Request {
 				timeout: TIME_OUT,
 				data: data,
 				header: {
-					Authorization: 'Xz/H6qtVS9Tf1dD6p5cDoy09l4J1IHld1HENJutKfehT0xmLZLV4Cuori7tVFQGi'
+					Authorization: '18Nw7iipm35nenxP8UhEiKJXBJgeQtRa8xxshKsUsJyWf5e5nY1XlOpNErdnVH7D'
 				},
 				success(res) {
 					resolve(res.data)
